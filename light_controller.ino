@@ -3,7 +3,8 @@ const byte interrupt1Pin = 2;
 const byte interrupt2Pin = 3;
 volatile int counter = 0;
 byte lightArray[16]={0, 1, 2, 3, 5, 7, 10, 15, 22, 31, 44, 63, 90, 127, 180, 255};
-byte light = 0;
+volatile byte light = 0;
+
 void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(interrupt1Pin, INPUT_PULLUP);
@@ -16,33 +17,35 @@ void setup() {
 
 void loop() {  
   if (counter > 0) {
-    if ( counter == 180 ) {
+    if ( (counter == 180) && ( light == 0 ) ) {
       light = 0;
     }
     if (counter > 164) {
       // зажигаем 
       analogWrite(ledPin, lightArray[light]);      
-      light++;
+      if (light < 15 ) { 
+        light++;
+      }  
     } 
-    if ( counter == 16 ) {
+    if ( counter == 16  && ( light  == 15 ) ) {
       light = 15;
     }
     if (counter < 17) {
       // гасим
       analogWrite(ledPin, lightArray[light]);      
-      light--;
+      if (light > 0 ) { 
+        light--;
+      }
     }
     counter--;
     delay(200);    
     Serial.print("Conter is "); 
-    Serial.println(counter, DEC);
+    Serial.print(counter, DEC);
+    Serial.print("\t Light is "); 
+    Serial.println(light, DEC);
   }
 }
 
 void change() {
   counter = 180;
-  Serial.print("Conter is "); 
-  Serial.println(counter, DEC);
-  digitalWrite(ledPin, 1);
-  Serial.println("Led is on "); 
 }
