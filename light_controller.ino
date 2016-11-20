@@ -11,7 +11,6 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(interrupt1Pin), change, CHANGE); 
   pinMode(interrupt2Pin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(interrupt2Pin), change, CHANGE); 
-  Serial.begin(115200);
   digitalWrite(ledPin, 0);
 }
 
@@ -30,7 +29,7 @@ void loop() {
     if ( counter == 16  && ( light  == 15 ) ) {
       light = 15;
     }
-    if (counter < 17) {
+    if (counter < 16) {
       // гасим
       analogWrite(ledPin, lightArray[light]);      
       if (light > 0 ) { 
@@ -39,10 +38,6 @@ void loop() {
     }
     counter--;
     delay(200);    
-    Serial.print("Conter is "); 
-    Serial.print(counter, DEC);
-    Serial.print("\t Light is "); 
-    Serial.println(light, DEC);
   }
 }
 
