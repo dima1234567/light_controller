@@ -16,10 +16,10 @@ void setup() {
 
 void loop() {  
   if (counter > 0) {
-    if ( (counter == 180) && ( light == 0 ) ) {
+    if ( (counter == 600) && ( light == 0 ) ) {
       light = 0;
     }
-    if (counter > 164) {
+    if (counter > 584) {
       // зажигаем 
       analogWrite(ledPin, lightArray[light]);      
       if (light < 15 ) { 
@@ -37,10 +37,10 @@ void loop() {
       }
     }
     counter--;
-    delay(200);    
+    delay(100);    
   }
 }
 
 void change() {
-  counter = 180;
+  counter = 600;
 }
