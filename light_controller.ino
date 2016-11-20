@@ -36,6 +36,9 @@ void loop() {
         light--;
       }
     }
+    if (light == 0) {
+      digitalWrite(ledPin, LOW);      
+    }
     counter--;
     delay(100);    
   }
