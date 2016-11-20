@@ -19,13 +19,16 @@ void loop() {
     if ( (counter == 600) && ( light == 0 ) ) {
       light = 0;
     }
-    if (counter > 584) {
+    if (counter > 583) {
       // зажигаем 
       analogWrite(ledPin, lightArray[light]);      
       if (light < 15 ) { 
         light++;
       }  
     } 
+    if (light == 15) {
+      digitalWrite(ledPin, HIGH);      
+    }
     if ( counter == 16  && ( light  == 15 ) ) {
       light = 15;
     }
